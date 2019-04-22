@@ -1,4 +1,4 @@
-package kermit.algorithm.sort;
+package kermit.algorithm.sort.realized;
 
 import java.util.Comparator;
 import java.util.List;
@@ -9,10 +9,9 @@ import java.util.List;
  * @Create by: 10:32 2019/4/6
  */
 public class BubbleSort implements Sort {
-    BubbleSort(){}
-
     @Override
     public <T> void sort(List<T> list, Comparator<T> comparator) {
+        sortBefore();
         checkEmpty(list);
         System.out.println("========== 冒泡排序 ==========");
         int len = list.size();
