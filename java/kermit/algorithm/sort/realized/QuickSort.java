@@ -1,6 +1,5 @@
 package kermit.algorithm.sort.realized;
 
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -8,6 +7,9 @@ import java.util.List;
  * @Author: BoyuSun
  * @Description: 快速排序
  */
-public class QuickSort {
+public class QuickSort implements Sort{
+    @Override
+    public <T> void sort(List<T> list, SortRule sr, int sortRuleType) {
 
+    }
 }

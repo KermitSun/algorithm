@@ -8,6 +8,9 @@ import java.util.List;
  * @Author: BoyuSun
  * @Description: 基数排序
  */
-public class RadixSort {
+public class RadixSort implements Sort{
+    @Override
+    public <T> void sort(List<T> list, SortRule sr, int sortRuleType) {
 
+    }
 }
