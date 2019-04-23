@@ -9,14 +9,14 @@ import java.util.List;
  *@Date: 13:43 2019/4/22
  *@Description: 排序父接口
  */
-public interface Sort {
-    <T> void sort(List<T> list, Comparator<T> comparator);
+public interface Sort<T>{
+    void sort(List<T> list, SortRule sr, int sortRuleType);
 
     /**
      *@Date: 11:07 2019/4/22
      *@Description: 交换
      */
-    default <T> void swap(List<T> list, int idx1, int idx2){
+    default void swap(List<T> list, int idx1, int idx2){
         T o = list.get(idx1);
         list.set(idx1, list.get(idx2));
         list.set(idx2, o);
@@ -32,10 +32,12 @@ public interface Sort {
         }
     }
 
+    //todo 监控
     default void sortBefore(){
         SortMonitoring.getSupperMethod();
     }
 
+    //todo 监控
     default void sortAfter(){
 
     }

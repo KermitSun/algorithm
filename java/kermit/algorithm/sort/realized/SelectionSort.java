@@ -8,9 +8,6 @@ import java.util.List;
  * @Author: BoyuSun
  * @Description: 选择排序
  */
-public class SelectionSort implements Sort {
-    @Override
-    public <T> void sort(List<T> list, Comparator<T> comparator) {
+public class SelectionSort {
 
-    }
 }

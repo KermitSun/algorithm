@@ -8,9 +8,6 @@ import java.util.List;
  * @Author: BoyuSun
  * @Description: 归并排序
  */
-public class MergeSort implements Sort {
-    @Override
-    public <T> void sort(List<T> list, Comparator<T> comparator) {
+public class MergeSort{
 
-    }
 }

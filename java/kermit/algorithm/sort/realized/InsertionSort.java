@@ -8,9 +8,6 @@ import java.util.List;
  * @Author: BoyuSun
  * @Description: 插入排序
  */
-public class InsertionSort implements Sort{
-    @Override
-    public <T> void sort(List<T> list, Comparator<T> comparator) {
+public class InsertionSort<T>{
 
-    }
 }

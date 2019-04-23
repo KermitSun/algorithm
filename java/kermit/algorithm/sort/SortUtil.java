@@ -29,8 +29,6 @@ public class SortUtil {
         getBubbleBean().sort(list, comparator);
     }
 
-
-
     /**
      *@Date: 13:40 2019/4/22
      *@Description: 获取排序对象

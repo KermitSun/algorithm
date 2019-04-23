@@ -8,9 +8,6 @@ import java.util.List;
  * @Author: BoyuSun
  * @Description: 快速排序
  */
-public class QuickSort implements Sort {
-    @Override
-    public <T> void sort(List<T> list, Comparator<T> comparator) {
+public class QuickSort {
 
-    }
 }

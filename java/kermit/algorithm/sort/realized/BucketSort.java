@@ -8,9 +8,5 @@ import java.util.List;
  * @Author: BoyuSun
  * @Description: 桶排序
  */
-public class BucketSort implements Sort {
-    @Override
-    public <T> void sort(List<T> list, Comparator<T> comparator) {
-
-    }
+public class BucketSort {
 }
