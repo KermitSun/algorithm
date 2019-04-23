@@ -1,8 +1,5 @@
 package kermit.algorithm.sort.realized;
 
-import kermit.algorithm.sort.SortMonitoring;
-
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -33,15 +30,5 @@ public interface Sort{
         if(list == null){
             throw new NullPointerException("参数不能为空");
         }
-    }
-
-    //todo 监控
-    default void sortBefore(){
-        SortMonitoring.getSupperMethod();
-    }
-
-    //todo 监控
-    default void sortAfter(){
-
     }
 }
