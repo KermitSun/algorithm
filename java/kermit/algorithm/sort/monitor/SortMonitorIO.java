@@ -13,7 +13,7 @@ public interface SortMonitorIO {
      * @Description: 记录日志,每次排序后记录日志
      * @Create by: 21:18 2019/4/23
      */
-    void log(CurrentSortMonitor result);
+    void log(SortMonitorLog result);
 
     /**
      * @Author: Kermit

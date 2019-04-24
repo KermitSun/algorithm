@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public abstract class SortMonitor {
     //保证线程安全
-    private static ThreadLocal<CurrentSortMonitor> tl = new ThreadLocal<>();
+    private static ThreadLocal<SortMonitorLog> tl = new ThreadLocal<>();
     private static SortMonitorIO operation = null;
     private static ConcurrentHashMap<String, SortMonitorResult> resultMap = new ConcurrentHashMap();
 
@@ -25,7 +25,7 @@ public abstract class SortMonitor {
      * @Create by: 21:24 2019/4/23
      */
     public static <T,S extends Sort> void startMonitoring(List<T> list, Class<T> sortObj, S sortMethod){
-        CurrentSortMonitor sm = getCurrentSortMonitor();
+        SortMonitorLog sm = getCurrentSortMonitor();
         sm.sortObjPath = sortObj.getName();
         sm.size = list.size();
         sm.list = list;
@@ -40,13 +40,13 @@ public abstract class SortMonitor {
      * @Create by: 21:34 2019/4/23
      */
     public static <T> void endMonitoring(){
-        CurrentSortMonitor currentSortMonitor = getCurrentSortMonitor();
-        currentSortMonitor.endTime = System.currentTimeMillis();
-        currentSortMonitor.sequentialNum = currentSortMonitor.sortMethod.getSequentialNum();
+        SortMonitorLog sortMonitorLog = getCurrentSortMonitor();
+        sortMonitorLog.endTime = System.currentTimeMillis();
+        sortMonitorLog.sequentialNum = sortMonitorLog.sortMethod.getSequentialNum();
         SortMonitorResult result = calculate();
         if(operation != null){
             operation.writeMonitorOperationResult(result);
-            operation.log(currentSortMonitor);
+            operation.log(sortMonitorLog);
         }
     }
 
@@ -56,16 +56,16 @@ public abstract class SortMonitor {
      * @Create by: 21:41 2019/4/23
      */
     private static SortMonitorResult calculate(){
-        CurrentSortMonitor currentSortMonitor = getCurrentSortMonitor();
-        int range = SortMonitorRange.getRange(currentSortMonitor.getSize());
-        SortMonitorResult result = resultMap.get(currentSortMonitor.getSortObjPath()+range);
-        String sortMethodName = currentSortMonitor.sortMethod.getClass().getName();
+        SortMonitorLog sortMonitorLog = getCurrentSortMonitor();
+        int range = SortMonitorRange.getRange(sortMonitorLog.getSize());
+        SortMonitorResult result = resultMap.get(sortMonitorLog.getSortObjPath()+range);
+        String sortMethodName = sortMonitorLog.sortMethod.getClass().getName();
         if(result == null){
             result = new SortMonitorResult();
             result.range = range;
-            result.sortObjPath = currentSortMonitor.sortObjPath;
+            result.sortObjPath = sortMonitorLog.sortObjPath;
             SortMonitorResult.SortMonitorResultMethod smrm = result.new SortMonitorResultMethod();
-            smrm.averageTime = getAverageTime(currentSortMonitor);
+            smrm.averageTime = getAverageTime(sortMonitorLog);
             smrm.count = 1;
             smrm.sortMethodName = sortMethodName;
             result.map.put(sortMethodName, smrm);
@@ -73,27 +73,27 @@ public abstract class SortMonitor {
             SortMonitorResult.SortMonitorResultMethod smrm = result.map.get(sortMethodName);
             if(smrm == null){
                 smrm = result.new SortMonitorResultMethod();
-                smrm.averageTime = getAverageTime(currentSortMonitor);
+                smrm.averageTime = getAverageTime(sortMonitorLog);
                 smrm.count = 1;
                 smrm.sortMethodName = sortMethodName;
                 result.map.put(sortMethodName, smrm);
             }else{
-                smrm.averageTime = getAverageTime(currentSortMonitor, smrm);
+                smrm.averageTime = getAverageTime(sortMonitorLog, smrm);
                 smrm.count += smrm.count;
             }
         }
-        resultMap.put(currentSortMonitor.getSortObjPath()+range, result);
+        resultMap.put(sortMonitorLog.getSortObjPath()+range, result);
         return result;
     }
 
-    private static BigDecimal getAverageTime(CurrentSortMonitor currentSortMonitor, SortMonitorResult.SortMonitorResultMethod smrm){
-        BigDecimal current = getAverageTime(currentSortMonitor);
+    private static BigDecimal getAverageTime(SortMonitorLog sortMonitorLog, SortMonitorResult.SortMonitorResultMethod smrm){
+        BigDecimal current = getAverageTime(sortMonitorLog);
         return smrm.averageTime.multiply(new BigDecimal(smrm.count)).add(current)
                 .divide(new BigDecimal(smrm.count+1), 10, RoundingMode.HALF_DOWN);
     }
-    private static BigDecimal getAverageTime(CurrentSortMonitor currentSortMonitor){
-        return new BigDecimal(currentSortMonitor.endTime - currentSortMonitor.startTime)
-                .divide(new BigDecimal(currentSortMonitor.size), 10, RoundingMode.HALF_DOWN);
+    private static BigDecimal getAverageTime(SortMonitorLog sortMonitorLog){
+        return new BigDecimal(sortMonitorLog.endTime - sortMonitorLog.startTime)
+                .divide(new BigDecimal(sortMonitorLog.size), 10, RoundingMode.HALF_DOWN);
     }
     /**
      * @Author: Kermit
@@ -121,12 +121,12 @@ public abstract class SortMonitor {
      * @Description: 获取结果对象
      * @Create by: 21:43 2019/4/23
      */
-    private static CurrentSortMonitor getCurrentSortMonitor(){
-        CurrentSortMonitor result = tl.get();
+    private static SortMonitorLog getCurrentSortMonitor(){
+        SortMonitorLog result = tl.get();
         if(result == null){
             synchronized (SortMonitor.class.getName()+Thread.currentThread().getName()){
                 if(result == null){
-                    result = new CurrentSortMonitor();
+                    result = new SortMonitorLog();
                     tl.set(result);
                 }
             }

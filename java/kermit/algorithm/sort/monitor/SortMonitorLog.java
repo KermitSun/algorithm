@@ -9,7 +9,7 @@ import java.util.List;
  * Description: 当次排序数据
  * Create by: 22:00 2019/4/23
  */
-public class CurrentSortMonitor {
+public class SortMonitorLog {
     protected Sort sortMethod;
     protected Integer sequentialNum = -1;
     protected List list = null;
@@ -48,7 +48,7 @@ public class CurrentSortMonitor {
 
     @Override
     public String toString() {
-        return "CurrentSortMonitor{" +
+        return "SortMonitorLog{" +
                 "sortMethod=" + sortMethod +
                 ", sequentialNum=" + sequentialNum +
                 ", list=" + list +

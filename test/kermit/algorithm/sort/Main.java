@@ -2,8 +2,7 @@ package kermit.algorithm.sort;
 
 import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
-import jdk.nashorn.internal.runtime.JSONFunctions;
-import kermit.algorithm.sort.monitor.CurrentSortMonitor;
+import kermit.algorithm.sort.monitor.SortMonitorLog;
 import kermit.algorithm.sort.monitor.SortMonitor;
 import kermit.algorithm.sort.monitor.SortMonitorResult;
 import kermit.algorithm.sort.realized.SortRule;
@@ -56,7 +55,7 @@ public class Main {
 class SortMonitorIO implements kermit.algorithm.sort.monitor.SortMonitorIO{
     Gson gson = new Gson();
     @Override
-    public void log(CurrentSortMonitor result) {
+    public void log(SortMonitorLog result) {
         System.out.println("log:"+JSON.toJSONString(result));
     }
 
