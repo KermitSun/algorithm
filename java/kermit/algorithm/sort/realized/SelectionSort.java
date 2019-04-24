@@ -14,6 +14,7 @@ import java.util.List;
  * 稳定性：稳定
  */
 public class SelectionSort implements Sort{
+
     @Override
     public <T> void sort(List<T> list, SortRule sr, int sortRuleType) {
 

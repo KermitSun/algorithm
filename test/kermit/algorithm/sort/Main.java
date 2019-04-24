@@ -1,5 +1,11 @@
 package kermit.algorithm.sort;
 
+import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
+import jdk.nashorn.internal.runtime.JSONFunctions;
+import kermit.algorithm.sort.monitor.CurrentSortMonitor;
+import kermit.algorithm.sort.monitor.SortMonitor;
+import kermit.algorithm.sort.monitor.SortMonitorResult;
 import kermit.algorithm.sort.realized.SortRule;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +24,9 @@ public class Main {
         }
     };
     List<Integer> list = Arrays.asList(1,2,6,3,10,3,5,4,6,8,4,3,5,23,4,5);
-
+    static{
+        SortMonitor.init(new SortMonitorIO());
+    }
     @Test
     public void bubble(){
         System.out.println("===============冒泡排序===============");
@@ -35,5 +43,30 @@ public class Main {
         System.out.println("===============选择排序===============");
     }
 
+    @Test
+    public void monitorSort(){
+        System.out.println("===============统计排序===============");
+        System.out.println(list);
+        SortUtil.monitorSort(list, sortRule, SortRule.ASC, Integer.class);
+        System.out.println(list);
+        System.out.println("===============统计排序===============");
+    }
+}
 
+class SortMonitorIO implements kermit.algorithm.sort.monitor.SortMonitorIO{
+    Gson gson = new Gson();
+    @Override
+    public void log(CurrentSortMonitor result) {
+        System.out.println("log:"+JSON.toJSONString(result));
+    }
+
+    @Override
+    public void writeMonitorOperationResult(SortMonitorResult result) {
+        System.out.println("result:"+gson.toJson(result));
+    }
+
+    @Override
+    public List<SortMonitorResult> readResult() {
+        return null;
+    }
 }

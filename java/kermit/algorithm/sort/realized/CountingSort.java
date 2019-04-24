@@ -7,9 +7,6 @@ import java.util.List;
  * @Author: BoyuSun
  * @Description: 计数排序
  */
-public class CountingSort implements Sort {
-    @Override
-    public <T> void sort(List<T> list, SortRule sr, int sortRuleType) {
-
-    }
+public class CountingSort  {
+   
 }

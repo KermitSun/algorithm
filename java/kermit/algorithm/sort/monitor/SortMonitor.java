@@ -13,11 +13,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Description: 监控排序方法的执行时间
  */
 public abstract class SortMonitor {
-    //是否计算有序性
-    static boolean sequential = false;
     //保证线程安全
     private static ThreadLocal<CurrentSortMonitor> tl = new ThreadLocal<>();
-    private static SortMonitorOperation operation = null;
+    private static SortMonitorIO operation = null;
     private static ConcurrentHashMap<String, SortMonitorResult> resultMap = new ConcurrentHashMap();
 
     private SortMonitor(){}
@@ -26,12 +24,14 @@ public abstract class SortMonitor {
      * @Description: 开始统计
      * @Create by: 21:24 2019/4/23
      */
-    public static <T> void startMonitoring(List<T> list, Class<T> sortObj, SortMonitorOperation operation){
+    public static <T,S extends Sort> void startMonitoring(List<T> list, Class<T> sortObj, S sortMethod){
         CurrentSortMonitor sm = getCurrentSortMonitor();
         sm.sortObjPath = sortObj.getName();
-        sm.startTime = System.currentTimeMillis();
         sm.size = list.size();
         sm.list = list;
+        sm.sortMethod = sortMethod;
+        sortMethod.clearSequentialNum();
+        sm.startTime = System.currentTimeMillis();
     }
 
     /**
@@ -42,12 +42,12 @@ public abstract class SortMonitor {
     public static <T> void endMonitoring(){
         CurrentSortMonitor currentSortMonitor = getCurrentSortMonitor();
         currentSortMonitor.endTime = System.currentTimeMillis();
-        if(sequential){
-            currentSortMonitor.sequentialNum = sequential(currentSortMonitor.list);
-        }
+        currentSortMonitor.sequentialNum = currentSortMonitor.sortMethod.getSequentialNum();
         SortMonitorResult result = calculate();
-        operation.writeMonitorOperationResult(result);
-        operation.log(currentSortMonitor);
+        if(operation != null){
+            operation.writeMonitorOperationResult(result);
+            operation.log(currentSortMonitor);
+        }
     }
 
     /**
@@ -59,26 +59,39 @@ public abstract class SortMonitor {
         CurrentSortMonitor currentSortMonitor = getCurrentSortMonitor();
         int range = SortMonitorRange.getRange(currentSortMonitor.getSize());
         SortMonitorResult result = resultMap.get(currentSortMonitor.getSortObjPath()+range);
+        String sortMethodName = currentSortMonitor.sortMethod.getClass().getName();
         if(result == null){
             result = new SortMonitorResult();
             result.range = range;
             result.sortObjPath = currentSortMonitor.sortObjPath;
-            result.averageTime = getAverageTime(currentSortMonitor);
-            result.count = 1;
+            SortMonitorResult.SortMonitorResultMethod smrm = result.new SortMonitorResultMethod();
+            smrm.averageTime = getAverageTime(currentSortMonitor);
+            smrm.count = 1;
+            smrm.sortMethodName = sortMethodName;
+            result.map.put(sortMethodName, smrm);
         }else{
-            result.averageTime = getAverageTime(currentSortMonitor, result);
-            result.count += result.count;
+            SortMonitorResult.SortMonitorResultMethod smrm = result.map.get(sortMethodName);
+            if(smrm == null){
+                smrm = result.new SortMonitorResultMethod();
+                smrm.averageTime = getAverageTime(currentSortMonitor);
+                smrm.count = 1;
+                smrm.sortMethodName = sortMethodName;
+                result.map.put(sortMethodName, smrm);
+            }else{
+                smrm.averageTime = getAverageTime(currentSortMonitor, smrm);
+                smrm.count += smrm.count;
+            }
         }
         resultMap.put(currentSortMonitor.getSortObjPath()+range, result);
         return result;
     }
 
-    private static BigDecimal getAverageTime(CurrentSortMonitor currentSortMonitor, SortMonitorResult result){
+    private static BigDecimal getAverageTime(CurrentSortMonitor currentSortMonitor, SortMonitorResult.SortMonitorResultMethod smrm){
         BigDecimal current = getAverageTime(currentSortMonitor);
-        return result.averageTime.multiply(new BigDecimal(result.count)).add(current)
-                .divide(new BigDecimal(result.count+1), 10, RoundingMode.HALF_DOWN);
+        return smrm.averageTime.multiply(new BigDecimal(smrm.count)).add(current)
+                .divide(new BigDecimal(smrm.count+1), 10, RoundingMode.HALF_DOWN);
     }
-    private static BigDecimal getAverageTime(CurrentSortMonitor currentSortMonitor, ){
+    private static BigDecimal getAverageTime(CurrentSortMonitor currentSortMonitor){
         return new BigDecimal(currentSortMonitor.endTime - currentSortMonitor.startTime)
                 .divide(new BigDecimal(currentSortMonitor.size), 10, RoundingMode.HALF_DOWN);
     }
@@ -98,18 +111,9 @@ public abstract class SortMonitor {
      * @Description: todo 初始化,读取
      * @Create by: 22:26 2019/4/23
      */
-    public static void init(SortMonitorOperation operation){
+    public static void init(SortMonitorIO operation){
         SortMonitor.operation = operation;
         List<SortMonitorResult> results = operation.readResult();
-    }
-
-    /**
-     * @Author: Kermit
-     * @Description: todo 计算有序性,需要传入比较规则，或者监控swap方法执行次数方法；
-     * @Create by: 21:21 2019/4/23
-     */
-    private static Integer sequential(List list){
-        return null;
     }
 
     /**

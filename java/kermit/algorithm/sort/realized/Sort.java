@@ -1,5 +1,7 @@
 package kermit.algorithm.sort.realized;
 
+import kermit.algorithm.sort.monitor.SortMonitorIO;
+
 import java.util.List;
 
 /**
@@ -7,6 +9,13 @@ import java.util.List;
  *@Description: 排序父接口
  */
 public interface Sort{
+    ThreadLocal<Integer> sequentialNum = new ThreadLocal(){
+        @Override
+        protected Integer initialValue() {
+            return 0;
+        }
+    };
+
     <T> void sort(List<T> list, SortRule sr, int sortRuleType);
 
     //todo 待实现
@@ -20,7 +29,16 @@ public interface Sort{
         T o = list.get(idx1);
         list.set(idx1, list.get(idx2));
         list.set(idx2, o);
+        sequentialNum.set(sequentialNum.get()+1);
     }
+
+    default void clearSequentialNum(){
+        sequentialNum.set(0);
+    }
+    default Integer getSequentialNum(){
+        return sequentialNum.get();
+    }
+
 
     /**
      *@Date: 11:08 2019/4/22

@@ -1,5 +1,8 @@
 package kermit.algorithm.sort.realized;
 
+import kermit.algorithm.sort.monitor.SortMonitor;
+import kermit.algorithm.sort.monitor.SortMonitorIO;
+
 import java.util.Comparator;
 import java.util.List;
 

@@ -7,9 +7,5 @@ import java.util.List;
  * @Author: BoyuSun
  * @Description: 桶排序
  */
-public class BucketSort implements Sort {
-    @Override
-    public <T> void sort(List<T> list, SortRule sr, int sortRuleType) {
-
-    }
+public class BucketSort  {
 }

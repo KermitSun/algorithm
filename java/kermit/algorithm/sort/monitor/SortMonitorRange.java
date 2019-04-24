@@ -2,10 +2,14 @@ package kermit.algorithm.sort.monitor;
 
 /**
  * @Author: Kermit
- * Description: TODO
+ * Description: 排序监控-统计范围
  * Create by: 22:41 2019/4/23
  */
 public class SortMonitorRange {
+    /**
+     *@Date: 9:24 2019/4/24
+     *@Description: 获取size所在范围
+     */
     public static int getRange(int size){
         if(in(size, 0, 8)){
             return 1;

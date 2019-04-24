@@ -1,13 +1,16 @@
 package kermit.algorithm.sort.monitor;
 
+import kermit.algorithm.sort.realized.Sort;
+
 import java.util.List;
 
 /**
  * @Author: Kermit
- * Description: TODO
+ * Description: 当次排序数据
  * Create by: 22:00 2019/4/23
  */
 public class CurrentSortMonitor {
+    protected Sort sortMethod;
     protected Integer sequentialNum = -1;
     protected List list = null;
     protected String sortObjPath = null;
@@ -37,5 +40,22 @@ public class CurrentSortMonitor {
 
     public Long getEndTime() {
         return endTime;
+    }
+
+    public Sort getSortMethod() {
+        return sortMethod;
+    }
+
+    @Override
+    public String toString() {
+        return "CurrentSortMonitor{" +
+                "sortMethod=" + sortMethod +
+                ", sequentialNum=" + sequentialNum +
+                ", list=" + list +
+                ", sortObjPath='" + sortObjPath + '\'' +
+                ", size=" + size +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                '}';
     }
 }
