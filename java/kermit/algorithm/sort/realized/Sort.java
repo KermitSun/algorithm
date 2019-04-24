@@ -2,6 +2,7 @@ package kermit.algorithm.sort.realized;
 
 import kermit.algorithm.sort.monitor.SortMonitorIO;
 
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -18,8 +19,7 @@ public interface Sort{
 
     <T> void sort(List<T> list, SortRule sr, int sortRuleType);
 
-    //todo 待实现
-    //<T> void sort(List<T> list, Comparable comparable);
+    <T> void sort(List<T> list, Comparator comparator);
 
     /**
      *@Date: 11:07 2019/4/22

@@ -34,4 +34,23 @@ public class BubbleSort implements Sort {
             }
         }
     }
+
+    @Override
+    public <T> void sort(List<T> list, Comparator comparator) {
+        checkEmpty(list);
+        int len = list.size();
+        for(int i=0;i<len;i++){
+            boolean flag = true;
+            for(int j=0;j<len-i-1;j++){
+                if(comparator.compare(list.get(j + 1), list.get(j)) < 0){
+                    swap(list, j, j+1);
+                    flag = false;
+                }
+            }
+            if(flag){
+                break;
+            }
+        }
+    }
+
 }

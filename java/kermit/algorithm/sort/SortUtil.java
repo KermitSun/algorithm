@@ -1,7 +1,6 @@
 package kermit.algorithm.sort;
 
 import kermit.algorithm.sort.monitor.SortMonitor;
-import kermit.algorithm.sort.monitor.SortMonitorIO;
 import kermit.algorithm.sort.realized.*;
 
 import java.util.List;
@@ -44,6 +43,7 @@ public class SortUtil {
      *@Description: 监控排序
      */
     public static <T> void monitorSort(List<T> list, SortRule sr, int sortRuleType, Class<T> sortObj){
+
         Sort sortBean = autoGetSortBean(list.size());
         SortMonitor.startMonitoring(list, sortObj, sortBean);
         sortBean.sort(list, sr, sortRuleType);
