@@ -4,12 +4,11 @@ import kermit.algorithm.sort.SortUtil;
 import kermit.algorithm.sort.realized.SortRule;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 /**
- * @Date: 2019/4/2510:25
+ * @Date: 2019/4/25 10:25
  * @Author: BoyuSun
  * @Description: 在int[m]的数组里，找n个值，这n个值相加=100，有多少种相加方式
  * int[m]里每个值都在[1,100]范围内
