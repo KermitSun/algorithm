@@ -16,6 +16,7 @@ import java.util.Random;
 public class AddEq100 {
     private static int m = 7; //数组的长度
     private static int n = 2;  //加法因子数量
+    private static int targetSum = 100;//目标值
     private static List<Integer> arr = gene(m);//随机生成的集合
     private static int topIdx = m-1;//加法因子index上限
     private static int counter = 0;//计数器
@@ -44,17 +45,17 @@ public class AddEq100 {
             return;
         if(curLocal > n)
             return;
-        if(arr.get(curIdx)*(n-curLocal)+sum>100)
+        if(arr.get(curIdx)*(n-curLocal)+sum>targetSum)
             return;
         //当前值往后循环
         while(curIdx < (m-n+curLocal)){
             System.out.println("curLocal:"+curLocal+",curIdx:"+curIdx+",sum:"+sum+",loopNum:"+(++loopNum));
             int sumBack = sum + arr.get(curIdx);
             if(curLocal == n){
-                if(sumBack == 100){
+                if(sumBack == targetSum){
                     counter++;
                     topIdx = curIdx;
-                }else if(sumBack > 100){
+                }else if(sumBack > targetSum){
                     topIdx = curIdx;
                     return;
                 }
@@ -68,7 +69,7 @@ public class AddEq100 {
         Random rd = new Random();
         List<Integer> arr = new ArrayList<>(m);
         for(int i = 0;i<m;i++){
-            arr.add(rd.nextInt(100)+1);
+            arr.add(rd.nextInt(targetSum)+1);
         }
         return arr;
     }
