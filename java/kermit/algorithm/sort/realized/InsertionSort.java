@@ -18,27 +18,12 @@ import java.util.List;
  */
 public class InsertionSort implements Sort{
     @Override
-    public <T> void sort(List<T> list, SortRule sr, int sortRuleType) {
+    public <T> void sort(List<T> list, SortCompareLambda lambda) {
         checkEmpty(list);
         int size = list.size();
         for(int i=1;i<size;i++){
             for(int j=i;j>0;j--){
-                if(sr.getSortItem(list.get(j)).compareTo(sr.getSortItem(list.get(j-1))) == sortRuleType){
-                    swap(list, j, j-1);
-                }else{
-                    break;
-                }
-            }
-        }
-    }
-
-    @Override
-    public <T> void sort(List<T> list, Comparator comparator) {
-        checkEmpty(list);
-        int size = list.size();
-        for(int i=1;i<size;i++){
-            for(int j=i;j>0;j--){
-                if(comparator.compare(list.get(j), list.get(j-1)) < 0){
+                if(lambda.operation(j, j-1)){
                     swap(list, j, j-1);
                 }else{
                     break;

@@ -17,9 +17,15 @@ public interface Sort{
         }
     };
 
-    <T> void sort(List<T> list, SortRule sr, int sortRuleType);
-
-    <T> void sort(List<T> list, Comparator comparator);
+    default <T> void sort(List<T> list, SortRule sr, int sortRuleType){
+        SortCompareLambda lambda = (int i, int j) -> sr.getSortItem(list.get(i)).compareTo(sr.getSortItem(list.get(j))) == sortRuleType;
+        sort(list, lambda);
+    }
+    default <T> void sort(List<T> list, Comparator comparator){
+        SortCompareLambda lambda = (int i, int j) -> comparator.compare(list.get(i), list.get(j)) < 0;
+        sort(list, lambda);
+    }
+    <T> void sort(List<T> list, SortCompareLambda lambda);
 
     /**
      *@Date: 11:07 2019/4/22

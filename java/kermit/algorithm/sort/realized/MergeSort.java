@@ -10,12 +10,7 @@ import java.util.List;
  */
 public class MergeSort implements Sort{
     @Override
-    public <T> void sort(List<T> list, SortRule sr, int sortRuleType) {
-
-    }
-
-    @Override
-    public <T> void sort(List<T> list, Comparator comparator) {
+    public <T> void sort(List<T> list, SortCompareLambda lambda) {
 
     }
 }

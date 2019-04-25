@@ -18,13 +18,13 @@ import java.util.List;
  */
 public class BubbleSort implements Sort {
     @Override
-    public void sort(List list, SortRule sr, int sortRuleType) {
+    public <T> void sort(List<T> list, SortCompareLambda lambda) {
         checkEmpty(list);
         int len = list.size();
         for(int i=0;i<len;i++){
             boolean flag = true;
             for(int j=0;j<len-i-1;j++){
-                if(sr.getSortItem(list.get(j + 1)).compareTo(sr.getSortItem(list.get(j))) == sortRuleType){
+                if(lambda.operation(j+1,j)){
                     swap(list, j, j+1);
                     flag = false;
                 }
@@ -34,23 +34,4 @@ public class BubbleSort implements Sort {
             }
         }
     }
-
-    @Override
-    public <T> void sort(List<T> list, Comparator comparator) {
-        checkEmpty(list);
-        int len = list.size();
-        for(int i=0;i<len;i++){
-            boolean flag = true;
-            for(int j=0;j<len-i-1;j++){
-                if(comparator.compare(list.get(j + 1), list.get(j)) < 0){
-                    swap(list, j, j+1);
-                    flag = false;
-                }
-            }
-            if(flag){
-                break;
-            }
-        }
-    }
-
 }

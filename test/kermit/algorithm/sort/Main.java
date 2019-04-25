@@ -9,6 +9,7 @@ import kermit.algorithm.sort.realized.SortRule;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -22,6 +23,12 @@ public class Main {
             return integer;
         }
     };
+    Comparator comparator = new Comparator<Integer>() {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o1-o2;
+        }
+    };
     List<Integer> list = Arrays.asList(1,2,6,3,10,3,5,4,6,8,4,3,5,23,4,5);
     static{
         SortMonitor.init(new SortMonitorIO());
@@ -30,6 +37,7 @@ public class Main {
     public void bubble(){
         System.out.println("===============冒泡排序===============");
         SortUtil.getBubbleSort().sort(list, sortRule, SortRule.DESC);
+        //SortUtil.getBubbleSort().sort(list, comparator);
         System.out.println(list);
         System.out.println("===============冒泡排序===============");
     }
