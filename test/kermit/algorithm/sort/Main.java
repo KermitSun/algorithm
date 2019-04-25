@@ -37,9 +37,19 @@ public class Main {
     @Test
     public void selection(){
         System.out.println("===============选择排序===============");
-        SortUtil.getSelectionSort().sort(list, sortRule, SortRule.ASC);
+        System.out.println(list);
+        SortUtil.getSelectionSort().sort(list, sortRule, SortRule.DESC);
         System.out.println(list);
         System.out.println("===============选择排序===============");
+    }
+
+    @Test
+    public void insertionSort(){
+        System.out.println("===============插入排序===============");
+        System.out.println(list);
+        SortUtil.getInsertionSort().sort(list, sortRule, SortRule.ASC);
+        System.out.println(list);
+        System.out.println("===============插入排序===============");
     }
 
     @Test
