@@ -45,6 +45,12 @@ public interface Sort{
         list.set(idx2, o);
         sequentialNum.set(sequentialNum.get()+1);
     }
+    default <T> void swap(T[] arr, int idx1, int idx2){
+        T o = arr[idx1];
+        arr[idx1] = arr[idx2];
+        arr[idx2] = arr[idx1];
+        //sequentialNum.set(sequentialNum.get()+1);
+    }
 
     /**
      *@Date: 19:22 2019/5/5

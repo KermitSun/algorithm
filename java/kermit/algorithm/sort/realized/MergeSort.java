@@ -6,6 +6,11 @@ import java.util.List;
  * @Date: 2019/4/2213:49
  * @Author: BoyuSun
  * @Description: 归并排序
+ *  最好时间复杂度：O(nlogn)
+ *  最坏时间复杂度：O(nlogn)
+ *  平均时间复杂度：O(nlogn)
+ *  空间复杂度：O(n)非原地，但是新建的堆空间是O(nlogn)
+ *  稳定性：稳定 相同数值不交换位置
  */
 public class MergeSort implements Sort{
     @Override
