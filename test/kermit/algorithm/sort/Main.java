@@ -23,10 +23,10 @@ public class Main {
             return integer;
         }
     };
-    Comparator comparator = new Comparator<Integer>() {
+    Comparator ascComparator = new Comparator<Integer>() {
         @Override
         public int compare(Integer o1, Integer o2) {
-            return o1-o2;
+            return o2-o1;
         }
     };
     List<Integer> list = Arrays.asList(1,2,6,3,10,3,5,4,6,8,4,3,5,23,4,5);
@@ -36,8 +36,8 @@ public class Main {
     @Test
     public void bubble(){
         System.out.println("===============冒泡排序===============");
-        SortUtil.getBubbleSort().sort(list, sortRule, SortRule.DESC);
-        //SortUtil.getBubbleSort().sort(list, comparator);
+        //SortUtil.getBubbleSort().sort(list, sortRule, SortRule.ASC);
+        SortUtil.getBubbleSort().sort(list, ascComparator);
         System.out.println(list);
         System.out.println("===============冒泡排序===============");
     }
@@ -45,8 +45,8 @@ public class Main {
     @Test
     public void selection(){
         System.out.println("===============选择排序===============");
-        System.out.println(list);
-        SortUtil.getSelectionSort().sort(list, sortRule, SortRule.DESC);
+        //SortUtil.getSelectionSort().sort(list, sortRule, SortRule.DESC);
+        SortUtil.getSelectionSort().sort(list, ascComparator);
         System.out.println(list);
         System.out.println("===============选择排序===============");
     }
@@ -54,8 +54,8 @@ public class Main {
     @Test
     public void insertionSort(){
         System.out.println("===============插入排序===============");
-        System.out.println(list);
-        SortUtil.getInsertionSort().sort(list, sortRule, SortRule.ASC);
+        //SortUtil.getInsertionSort().sort(list, sortRule, SortRule.ASC);
+        SortUtil.getInsertionSort().sort(list, ascComparator);
         System.out.println(list);
         System.out.println("===============插入排序===============");
     }
@@ -63,7 +63,6 @@ public class Main {
     @Test
     public void monitorSort(){
         System.out.println("===============统计排序===============");
-        System.out.println(list);
         SortUtil.monitorSort(list, sortRule, SortRule.ASC, Integer.class);
         System.out.println(list);
         System.out.println("===============统计排序===============");

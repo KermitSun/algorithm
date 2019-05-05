@@ -23,7 +23,7 @@ public class SelectionSort implements Sort{
             T limit = list.get(i);
             int idx = i;
             for(int j=i;j<len;j++){
-                if(lambda.operation(j, idx)){
+                if(!lambda.operation(idx,j)){
                     idx = j;
                     limit = list.get(j);
                 }

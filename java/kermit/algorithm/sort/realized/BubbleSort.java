@@ -24,7 +24,7 @@ public class BubbleSort implements Sort {
         for(int i=0;i<len;i++){
             boolean flag = true;
             for(int j=0;j<len-i-1;j++){
-                if(lambda.operation(j+1,j)){
+                if(!lambda.operation(j,j+1)){
                     swap(list, j, j+1);
                     flag = false;
                 }

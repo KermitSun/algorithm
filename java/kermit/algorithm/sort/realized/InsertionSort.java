@@ -23,7 +23,7 @@ public class InsertionSort implements Sort{
         int size = list.size();
         for(int i=1;i<size;i++){
             for(int j=i;j>0;j--){
-                if(lambda.operation(j, j-1)){
+                if(!lambda.operation(j-1,j)){
                     swap(list, j, j-1);
                 }else{
                     break;
