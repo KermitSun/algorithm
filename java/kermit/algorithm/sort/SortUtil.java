@@ -9,6 +9,7 @@ public class SortUtil {
     private final static ThreadLocal<BubbleSort> bsTL = new ThreadLocal<>();
     private final static ThreadLocal<SelectionSort> ssTL = new ThreadLocal<>();
     private final static ThreadLocal<InsertionSort> isTL = new ThreadLocal<>();
+    private final static ThreadLocal<MergeSort> msTL = new ThreadLocal<>();
     private final static ThreadLocal<QuickSort> qsTL = new ThreadLocal<>();
     public static BubbleSort getBubbleSort(){
         return getSort(bsTL, BubbleSort.class);
@@ -18,6 +19,9 @@ public class SortUtil {
     }
     public static InsertionSort getInsertionSort(){
         return getSort(isTL, InsertionSort.class);
+    }
+    public static MergeSort getMergeSort(){
+        return getSort(msTL, MergeSort.class);
     }
     public static QuickSort getQuickSort(){
         return getSort(qsTL, QuickSort.class);

@@ -3,6 +3,7 @@ package kermit.algorithm.sort.realized;
 import kermit.algorithm.sort.monitor.SortMonitorIO;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -52,21 +53,24 @@ public interface Sort{
     default <T> void merge(List<T> list, int left, int boundary, int right, SortCompareLambda lambda){
         int idx1 = left;
         int idx2 = boundary+1;
-        List<T> newList = new ArrayList(right-left+1);
+        List<T> newList = new ArrayList(right-left);
         while(idx1 <= boundary && idx2 <= right){
-            if(!lambda.operation(idx1, idx2)){
+            if(lambda.operation(idx1, idx2)){
                 newList.add(list.get(idx1++));
             }else{
                 newList.add(list.get(idx2++));
             }
         }
-        System.arraycopy(list, left, newList, 0, newList.size());
+
         if(newList.size() < (right-left+1)){
             if(idx1 < boundary){
-                System.arraycopy(list, left+newList.size(), list, idx1+1, boundary-idx1);
-            }else{
-                System.arraycopy(list, boundary+newList.size()+1, list, idx2+1, right-idx2);
+                newList.addAll(list.subList(idx1, boundary+1));
+            }else if(idx2 < right){
+                newList.addAll(list.subList(idx2, right+1));
             }
+        }
+        for(int i=left,j=0;j<newList.size();i++,j++){
+            list.set(i, newList.get(j));
         }
     }
 

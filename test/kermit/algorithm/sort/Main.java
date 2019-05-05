@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import kermit.algorithm.sort.monitor.SortMonitorLog;
 import kermit.algorithm.sort.monitor.SortMonitor;
 import kermit.algorithm.sort.monitor.SortMonitorResult;
+import kermit.algorithm.sort.realized.SortCompareLambda;
 import kermit.algorithm.sort.realized.SortRule;
 import org.junit.jupiter.api.Test;
 
@@ -61,11 +62,27 @@ public class Main {
     }
 
     @Test
+    public void mergeSort(){
+        System.out.println("===============归并排序===============");
+        //SortUtil.getMergeSort().sort(list, sortRule, SortRule.ASC);
+        SortUtil.getMergeSort().sort(list, ascComparator);
+        System.out.println(list);
+        System.out.println("===============归并排序===============");
+    }
+
+    @Test
     public void monitorSort(){
         System.out.println("===============统计排序===============");
         SortUtil.monitorSort(list, sortRule, SortRule.ASC, Integer.class);
         System.out.println(list);
         System.out.println("===============统计排序===============");
+    }
+
+    @Test
+    public void test(){
+        List<Integer> list1 = Arrays.asList(1,2,3,3,10,1,4,6,8);
+        SortUtil.getMergeSort().sort(list1, ascComparator);
+        System.out.println(list1);
     }
 }
 
