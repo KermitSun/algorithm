@@ -1,6 +1,5 @@
 package kermit.algorithm.sort.realized;
 
-import java.util.Comparator;
 import java.util.List;
 
 /**

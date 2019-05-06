@@ -1,6 +1,5 @@
 package kermit.algorithm.sort.realized;
 
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -15,13 +14,14 @@ import java.util.List;
  *  稳定性：
  */
 public class QuickSort implements Sort{
-    private SortCompareLambda lambda;
     @Override
     public <T> void sort(List<T> list, SortCompareLambda lambda) {
         checkEmpty(list);
         this.lambda = lambda;
         partition(list, 0, list.size()-1);
     }
+
+    private SortCompareLambda lambda;
 
     /**
      * @Author: Kermit

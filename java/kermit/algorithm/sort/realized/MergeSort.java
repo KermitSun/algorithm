@@ -45,5 +45,4 @@ public class MergeSort implements Sort{
         recursion(list, mid+1, rightIdx);
         merge(list, leftIdx, mid, rightIdx, lambda);
     }
-
 }

@@ -73,7 +73,7 @@ public class Main {
     @Test
     public void quickSort(){
         System.out.println("===============归并排序===============");
-        SortUtil.getQuickSort().sort(list, sortRule, SortRule.ASC);
+        SortUtil.getQuickSort().sort(list, sortRule, SortRule.DESC);
         //System.out.println(list);
         //SortUtil.getQuickSort().sort(list, ascComparator);
         System.out.println(list);
