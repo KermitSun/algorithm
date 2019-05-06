@@ -14,7 +14,7 @@ import java.util.List;
 public interface Sort{
     /**
      *@Date: 19:57 2019/5/5
-     *@Description: 记录初始值
+     *@Description: 记录乱序值
      */
     ThreadLocal<Integer> sequentialNum = new ThreadLocal(){
         @Override
@@ -22,14 +22,15 @@ public interface Sort{
             return 0;
         }
     };
-    //要求i<j，并且list.get(i)和list.get(j)满足sortRuleType
+
     default <T> void sort(List<T> list, SortRule sr, int sortRuleType){
-        //升序时候，list.get(j)>list.get(i),判断通过
+        //要求i<j，满足条件返回true
         SortCompareLambda lambda = (int i, int j) -> sr.getSortItem(list.get(j)).compareTo(sr.getSortItem(list.get(i))) != sortRuleType;
         sort(list, lambda);
     }
-    //要求i<j，并且list.get(i)和list.get(j)满足comparator
+
     default <T> void sort(List<T> list, Comparator comparator){
+        //要求i<j，满足返回true
         SortCompareLambda lambda = (int i, int j) -> comparator.compare(list.get(i), list.get(j)) >= 0;
         sort(list, lambda);
     }
@@ -40,16 +41,20 @@ public interface Sort{
      *@Description: 交换
      */
     default <T> void swap(List<T> list, int idx1, int idx2){
+        if(idx1 == idx2)
+            return;
         T o = list.get(idx1);
         list.set(idx1, list.get(idx2));
         list.set(idx2, o);
+        //记录乱序值
         sequentialNum.set(sequentialNum.get()+1);
     }
     default <T> void swap(T[] arr, int idx1, int idx2){
         T o = arr[idx1];
         arr[idx1] = arr[idx2];
         arr[idx2] = arr[idx1];
-        //sequentialNum.set(sequentialNum.get()+1);
+        //记录乱序值
+        sequentialNum.set(sequentialNum.get()+1);
     }
 
     /**

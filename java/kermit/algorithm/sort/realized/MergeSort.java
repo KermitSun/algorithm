@@ -6,6 +6,9 @@ import java.util.List;
  * @Date: 2019/4/2213:49
  * @Author: BoyuSun
  * @Description: 归并排序
+ * 采用二分法，将数组拆分成最大为2的多个子数组，
+ * 进行排序，然后将有序集合进行merge合并
+ * 归并排序是很稳定的排序算法，但是其空间复杂度高，对大数据量的排序处理并不是很好
  *  最好时间复杂度：O(nlogn)
  *  最坏时间复杂度：O(nlogn)
  *  平均时间复杂度：O(nlogn)
