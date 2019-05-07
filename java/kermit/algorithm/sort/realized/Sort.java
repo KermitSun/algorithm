@@ -25,7 +25,7 @@ public interface Sort{
 
     default <T> void sort(List<T> list, SortRule sr, int sortRuleType){
         //要求i<j，满足条件返回true
-        SortCompareLambda lambda = (int i, int j) -> sr.getSortItem(list.get(j)).compareTo(sr.getSortItem(list.get(i))) != sortRuleType;
+        SortCompareLambda lambda = (int i, int j) -> sr.getProperty(list.get(j)).compareTo(sr.getProperty(list.get(i))) != sortRuleType;
         sort(list, lambda);
     }
 
