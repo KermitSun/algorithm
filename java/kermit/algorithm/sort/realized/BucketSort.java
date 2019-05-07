@@ -7,10 +7,8 @@ import java.util.List;
  * @Date: 2019/4/2213:56
  * @Author: BoyuSun
  * @Description: 桶排序
- * 需要根据list的条件把size个数据放到m个桶里，这个m如何界定才比较好。。。
- * 采用动态生成桶的方式，首先有个hash方法
- * 这个方法基于Sort是没法实现的。。。
- * 暂时停滞
+ * 需要根据list的条件把size个数据放到m个桶里，每个桶里有个范围，这个m需要动态扩展，保证每个桶里的数据量不至于太多
+ * 桶排序只有使用SortRule才能获取具体要排序的元素，所以只实现SortRule方式的排序
  */
 public class BucketSort implements Sort{
     private int bucketNum;
@@ -28,8 +26,8 @@ public class BucketSort implements Sort{
     public <T> void sort(List<T> list, SortCompareLambda lambda) {
         throw new RuntimeException("未实现该方法");
     }
-    public <T> int hash(T t){
+   /* public <T> int hash(T t){
         int hashCode = t.hashCode() / bucketNum;
         return hashCode;
-    }
+    }*/
 }
