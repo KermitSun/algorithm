@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @Date: 2019/5/714:10
- * @Author: BoyuSun
+ * @Date: 2019/5/7 14:10
+ * @Author: Kermit
  * @Description: 二分查找
  * 针对有序集合
  * 单值查找，单值范围查找

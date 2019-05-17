@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Date: 2019/5/1717:31
- * @Author: BoyuSun
+ * @Date: 2019/5/17 17:31
+ * @Author: Kermit
  * @Description: 计算阶乘
  */
 public class Factorial {

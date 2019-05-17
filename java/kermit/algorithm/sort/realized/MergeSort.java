@@ -3,8 +3,8 @@ package kermit.algorithm.sort.realized;
 import java.util.List;
 
 /**
- * @Date: 2019/4/2213:49
- * @Author: BoyuSun
+ * @Date: 2019/4/22 13:49
+ * @Author: Kermit
  * @Description: 归并排序
  * 采用二分法，将数组拆分成最大为2的多个子数组，
  * 进行排序，然后将有序集合进行merge合并

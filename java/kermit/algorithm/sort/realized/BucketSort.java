@@ -4,8 +4,8 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * @Date: 2019/4/2213:56
- * @Author: BoyuSun
+ * @Date: 2019/4/22 13:56
+ * @Author: Kermit
  * @Description: 桶排序
  * 需要根据list的条件把size个数据放到m个桶里，每个桶里有个范围，这个m需要动态扩展，保证每个桶里的数据量不至于太多
  * 桶排序只有使用SortRule才能获取具体要排序的元素，所以只实现SortRule方式的排序

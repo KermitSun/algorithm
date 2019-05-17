@@ -3,8 +3,8 @@ package kermit.algorithm.sort.realized;
 import java.util.List;
 
 /**
- * @Date: 2019/4/2213:47
- * @Author: BoyuSun
+ * @Date: 2019/4/22 13:47
+ * @Author: Kermit
  * @Description: 选择排序
  * 将数组分为两部分，一部分有序，一部分无序，从无序的集合中选出最小/最大的放在有序集合的最后
  * 最好时间复杂度：O(n^2)

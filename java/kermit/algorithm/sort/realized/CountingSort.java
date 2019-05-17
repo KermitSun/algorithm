@@ -1,8 +1,8 @@
 package kermit.algorithm.sort.realized;
 
 /**
- * @Date: 2019/4/2213:56
- * @Author: BoyuSun
+ * @Date: 2019/4/22 13:56
+ * @Author: Kermit
  * @Description: 计数排序
  * 该方法并不适用与基本类型之外的类型，所以其要求只有Numver子类或者String才能实现
  * 具体实现是使用一个map，key保存需要比较的基本类型或者是String，value是记录出现了几次，

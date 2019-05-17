@@ -5,8 +5,8 @@ import kermit.algorithm.sort.realized.SortRule;
 import java.util.List;
 
 /**
- * @Date: 2019/5/619:06
- * @Author: BoyuSun
+ * @Date: 2019/5/6 19:06
+ * @Author: Kermit
  * @Description: 数学计算工具类
  */
 public class MathUtil {

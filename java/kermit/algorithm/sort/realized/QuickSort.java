@@ -3,8 +3,8 @@ package kermit.algorithm.sort.realized;
 import java.util.List;
 
 /**
- * @Date: 2019/4/2213:50
- * @Author: BoyuSun
+ * @Date: 2019/4/22 13:50
+ * @Author: Kermit
  * @Description: 快速排序
  * 在list中找到一个切分点，将小于切分点的放在左/右
  *  最好时间复杂度：O()

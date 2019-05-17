@@ -1,8 +1,8 @@
 package kermit.algorithm.list;
 
 /**
- * @Date: 2019/5/714:13
- * @Author: BoyuSun
+ * @Date: 2019/5/7 14:13
+ * @Author: Kermit
  * @Description:
  */
 public interface Property<Obj, Pro> {
