@@ -26,7 +26,7 @@ public class AddEq100 {
         System.out.println(arr);
         //排序
         SortUtil.getSelectionSort().sort(arr, new SortRule<Integer>(){
-            public Comparable getSortItem(Integer integer){
+            public Comparable getProperty(Integer integer){
                 return integer;
             }
         }, SortRule.ASC);

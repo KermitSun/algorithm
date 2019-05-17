@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class Main {
     SortRule<Integer> sortRule = new SortRule<Integer>() {
-        public Integer getSortItem(Integer integer) {
+        public Integer getProperty(Integer integer) {
             return integer;
         }
     };

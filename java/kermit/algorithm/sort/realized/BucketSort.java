@@ -16,7 +16,7 @@ public class BucketSort implements Sort{
 
     @Override
     public <T> void sort(List<T> list, SortRule sr, int sortRuleType){
-        Comparable sortItem = sr.getSortItem(list.get(1));
+        Comparable sortItem = sr.getProperty(list.get(1));
     }
     @Override
     public <T> void sort(List<T> list, Comparator comparator){
